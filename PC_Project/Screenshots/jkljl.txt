@@ -1,0 +1,26 @@
+compile: mpic++ -o qsort qsortMPI.cpp
+	run : mpirun -np <num_of_processes> qsort <input aray size>
+
+	A parallel quicksort program with threads of t.
+	The idea is:
+		1. partition array equally (with chunk_size = size / p) for each process
+		2. do local quicksort in each thread (time complexity is O((n/p) * log(n/p)))
+		3. merge all local sorted parts in a binary tree (with depth log(p))
+
+
+
+
+	
+The algorithm so far is suitable for a shared memory
+implementation. 
+ Distribute the array to be sorted
+ Broadcast a pivot among p processes
+ Each partitions n/p elements in O(n/p)
+ The re-arrangement of lower and upper parts involves
+communication
+ Need to know where a process should send its Si and Li
+parts
+ Once determined, data gets exchanged
+
+
+    
